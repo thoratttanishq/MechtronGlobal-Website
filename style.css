@@ -1,0 +1,590 @@
+/* ==================== VARIABLES ==================== */
+:root {
+  --clr-bg:#0d0d0d;
+  --clr-dark:#f3f4f6;
+  --clr-gray:#9ca3af;
+  --clr-accent:#3b82f6;
+  --clr-accent2:#10b981;
+  --radius:10px;
+  --transition:.4s;
+}
+
+/* ==================== RESET ==================== */
+* {margin:0; padding:0; box-sizing:border-box;}
+body {
+  font-family:'Inter', sans-serif;
+  color:var(--clr-dark);
+  line-height:1.6;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ==================== DARK OVERLAY ==================== */
+body::before {
+  content:"";
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.6);
+  z-index: -1;
+}
+
+/* ==================== PAGE BACKGROUNDS ==================== */
+body[class^="page-"]::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+  opacity: 1;
+}
+
+/* Page-specific background images */
+body.page-home::after { background-image: url('images/page-home.jfif'); }
+body.page-about::after { background-image: url('images/page-about.jfif'); }
+body.page-services::after { background-image: url('images/page-services.jpg'); }
+body.page-portfolio::after { background-image: url('images/page-portfolio.jpg'); }
+body.page-contact::after { background-image: url('images/contact-officee.jpg'); }
+
+/* ==================== HEADER ==================== */
+header {
+  padding:15px 0;
+  background:#111;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 3px 10px rgba(0,0,0,0.5);
+}
+.nav {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  max-width:1100px;
+  margin:auto;
+  padding:0 20px;
+}
+.logo h1 {
+  color:#fff;
+  font-size:1.8rem;
+  font-weight:700;
+}
+.nav-links {
+  display:flex;
+  align-items:center;
+  gap:24px;
+}
+.nav-links a {
+  font-weight:600;
+  color:var(--clr-dark);
+  transition:color var(--transition);
+  text-decoration:none;
+}
+.nav-links a:hover {color:var(--clr-accent);}
+.nav-links .cta {
+  padding:10px 20px;
+  background:var(--clr-accent);
+  color:#fff;
+  border-radius:var(--radius);
+  transition:background var(--transition), transform .2s;
+}
+.nav-links .cta:hover {
+  background:var(--clr-accent2);
+  transform:scale(1.05);
+}
+
+/* ==================== HERO ==================== */
+.hero {
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:120px 20px;
+  overflow:hidden;
+}
+.hero .hero-video {
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  z-index:0;
+  opacity:0.7;
+  border-radius:var(--radius);
+}
+.hero .overlay {
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.5);
+  z-index:1;
+  border-radius:var(--radius);
+}
+.hero-text {
+  position:relative;
+  z-index:2;
+  color:#fff;
+  max-width:800px;
+}
+.hero-text h1 {
+  font-size:clamp(2rem, 6vw, 48px);
+  font-weight:800;
+  margin-bottom:20px;
+  background:linear-gradient(90deg,#3b82f6,#10b981,#f59e0b);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:gradientText 8s linear infinite;
+}
+.hero-text p {
+  font-size:clamp(1rem, 2.8vw, 18px);
+  color:var(--clr-gray);
+  margin-bottom:30px;
+}
+.hero-text .cta {
+  margin-top:10px;
+}
+
+/* ==================== ABOUT PAGE CARD HOVER GLOW ==================== */
+.cards .card {
+  background: #1a1a1a; /* dark background */
+  border-radius: var(--radius);
+  overflow: hidden;
+  padding: 20px;
+  color: #fff;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.cards .card h3,
+.cards .card p {
+  color: #fff;
+  transition: text-shadow 0.4s ease;
+}
+
+/* Hover effect: lift + glow */
+.cards .card:hover {
+  transform: translateY(-6px) scale(1.03) rotateX(2deg) rotateY(2deg);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3), 
+              0 15px 30px rgba(0,0,0,0.5);
+}
+
+.cards .card:hover h3 {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.cards .card:hover p {
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+}
+
+/* Optional: subtle tilt animation on mouse move */
+.cards .card.tilt {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+
+/* ==================== SECTIONS ==================== */
+.section {padding:80px 20px;}
+.section-light {background:#111;}
+.section-title {
+  text-align:center;
+  margin-bottom:40px;
+  font-size:clamp(1.8rem, 5vw, 36px);
+  font-weight:700;
+  color:#fff;
+}
+
+/* ==================== CARDS (UPDATED WITH LINKS) ==================== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.cards a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.cards a h3,
+.cards a p {
+  color: #fff;
+}
+
+.cards a:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.cards a:visited {
+  color: #fff;
+}
+
+.cards a:hover h3 {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.card {
+  background:#1a1a1a;
+  border:1px solid #2c2c2c;
+  padding:30px;
+  border-radius:var(--radius);
+  transition:transform var(--transition),box-shadow var(--transition);
+  overflow:hidden;
+  position:relative;
+}
+.card:hover {
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 15px 30px rgba(0,0,0,0.5);
+}
+.card h3 {font-size:22px; margin-bottom:15px;}
+.card p {color:var(--clr-gray);}
+.tilt {transition:transform 0.3s ease;}
+
+@media (max-width: 900px) {
+  .cards {grid-template-columns: repeat(2, 1fr);}
+}
+@media (max-width: 600px) {
+  .cards {grid-template-columns: 1fr;}
+}
+
+/* ==================== PORTFOLIO ==================== */
+.portfolio-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:20px;
+}
+.portfolio-item {
+  position:relative;
+  overflow:hidden;
+  border-radius:var(--radius);
+}
+.portfolio-item img, .portfolio-item video {
+  width:100%;
+  display:block;
+  transition:transform var(--transition);
+}
+.portfolio-item:hover img, .portfolio-item:hover video {
+  transform:scale(1.1);
+}
+.portfolio-item .overlay {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  padding:15px;
+  text-align:center;
+  font-weight:600;
+  transition:all var(--transition);
+}
+
+/* ==================== COUNTERS ==================== */
+.counter-grid {
+  display:flex;
+  justify-content:space-around;
+  gap:40px;
+  margin-top:40px;
+  flex-wrap:wrap;
+}
+.counter-box {
+  text-align:center;
+}
+.counter-box .counter {
+  font-size:48px;
+  font-weight:800;
+  color:var(--clr-accent);
+}
+.counter-box p {
+  margin-top:10px;
+  color:var(--clr-gray);
+}
+
+/* ==================== CONTACT ==================== */
+.contact-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+  gap:40px;
+  margin-top:40px;
+}
+.contact-form {
+  background:#1a1a1a;
+  padding:30px;
+  border-radius:var(--radius);
+}
+.contact-form input,
+.contact-form textarea {
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  background:#111;
+  border:1px solid #2c2c2c;
+  color:#fff;
+  border-radius:var(--radius);
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color:var(--clr-accent);
+  outline:none;
+}
+.contact-form button {
+  width:100%;
+  padding:15px;
+  background:var(--clr-accent);
+  color:#fff;
+  border:none;
+  border-radius:var(--radius);
+  cursor:pointer;
+  transition:all var(--transition);
+}
+.contact-form button:hover {
+  background:var(--clr-accent2);
+  transform:scale(1.05);
+}
+
+/* ==================== SERVICE MEDIA FIX ==================== */
+.card img,
+.card video {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius);
+  margin-bottom: 15px;
+}
+.card video {
+  border: none;
+  outline: none;
+  background: #000;
+}
+.card video[autoplay] {
+  pointer-events: none;
+}
+
+/* ==================== FOOTER ==================== */
+footer {
+  background:#111;
+  color:var(--clr-gray);
+  padding:40px 20px;
+  text-align:center;
+  font-size:0.9rem;
+}
+
+/* ==================== MEPF SERVICE PAGE HERO BACKGROUND ==================== */
+body.page-service::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/service1-bg.jpg'); /* Replace with your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+  opacity: 1;
+}
+
+/* ==================== FULL-PAGE BACKGROUND FOR SERVICE ==================== */
+body.page-service::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/mepf-bg.jpg'); /* Replace with your background image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+  opacity: 1;
+}
+
+/* Dark overlay for readability */
+body.page-service::before {
+  content:"";
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.5);
+  z-index: -1;
+}
+
+/* ==================== FULL-WIDTH SAMPLE WORK GRID (MEPF PAGE) ==================== */
+.full-width-sample {
+  padding: 60px 20px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.full-width-sample .section-title {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+/* Grid stretches full width */
+.sample-grid.full-width {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.sample-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sample-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius);
+  transition: transform 0.3s ease;
+}
+
+.sample-item:hover img {
+  transform: scale(1.05);
+}
+
+.sample-title {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 12px 15px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.sample-item:hover .sample-title {
+  background: rgba(0,0,0,0.8);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .sample-grid.full-width {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .sample-grid.full-width {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==================== LIGHTBOX MEPF PAGE ==================== */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.lightbox-img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: var(--radius);
+  box-shadow: 0 0 30px rgba(0,0,0,0.8);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2.5rem;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  transition: color 0.3s ease;
+}
+
+.lightbox-close:hover {
+  color: var(--clr-accent);
+}
+
+/* ===== Logo and Slogan Styling ===== */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-img {
+  width: 60px;
+  height: auto;
+  object-fit: contain;
+  background: #000; /* adds black background */
+  padding: 4px; /* optional, adds spacing around logo */
+  border-radius: 0;
+}
+
+
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+}
+
+.slogan {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+/* Adjust spacing for responsiveness */
+@media (max-width: 768px) {
+  .logo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .hero-logo {
+    font-size: 1.4rem;
+  }
+
+  .slogan {
+    font-size: 0.8rem;
+  }
+}
+
+
