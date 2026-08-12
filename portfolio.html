@@ -3,71 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio - Mechtron Global</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Merriweather:wght@700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <title>Portfolio | Mechtron Global</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/logo.png">
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="page-portfolio">
-  <!-- Header -->
-  <header>
-    <div class="container nav">
-      <div class="logo"><h1 class="hero-logo">Mechtron Global</h1></div>
-      <div class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="services.html" class="nav-link">Services</a>
-        <a href="portfolio.html" class="nav-link active">Portfolio</a>
-        <a href="contact.html" class="cta nav-link">Contact</a>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <!-- Hero Section -->
-    <section class="hero full-bg parallax" data-aos="zoom-in">
-      <img src="images/portfolio-hero.jpg" alt="Portfolio Hero" class="hero-video">
-      <div class="overlay"></div>
-      <div class="hero-text centered">
-        <h1 class="animated-gradient">Our Portfolio</h1>
-        <p>Showcasing premium BIM projects executed with precision</p>
-      </div>
-    </section>
-
-    <!-- Portfolio Grid -->
-    <section class="section-light container" data-aos="fade-up">
-      <h2 class="section-title">Projects We’ve Delivered</h2>
-      <div class="portfolio-grid">
-        <div class="portfolio-item tilt" data-aos="fade-up" data-aos-delay="100">
-          <img src="images/project1.jpg" alt="Commercial Complex">
-          <div class="overlay">Commercial Complex</div>
-        </div>
-        <div class="portfolio-item tilt" data-aos="fade-up" data-aos-delay="200">
-          <video autoplay muted loop playsinline>
-            <source src="videos/project2.mp4" type="video/mp4">
-          </video>
-          <div class="overlay">Industrial Facility</div>
-        </div>
-        <div class="portfolio-item tilt" data-aos="fade-up" data-aos-delay="300">
-          <img src="images/project3.jpg" alt="Residential Project">
-          <div class="overlay">Residential Project</div>
-        </div>
-        <div class="portfolio-item tilt" data-aos="fade-up" data-aos-delay="400">
-          <video autoplay muted loop playsinline>
-            <source src="videos/project4.mp4" type="video/mp4">
-          </video>
-          <div class="overlay">Mixed-Use Development</div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    © <span id="year"></span> Mechtron Global • Crafted with precision
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script src="script.js"></script>
-</body>
+<body><div id="app"></div><script src="app.js" defer></script></body>
 </html>
