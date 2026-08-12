@@ -396,13 +396,15 @@ function contact() {
             </div>
             <img class="office-image" src="images/contact-office.jpg" alt="">
           </div>
-          <form class="contact-panel contact-form reveal" action="mailto:sales@mechtronglobal.com" method="post" enctype="text/plain">
+          <form class="contact-panel contact-form reveal" data-contact-form>
             <h3>Send an enquiry</h3>
             <label>Name<input name="name" autocomplete="name" required></label>
             <label>Email<input type="email" name="email" autocomplete="email" required></label>
             <label>Subject<input name="subject" required></label>
             <label>Message<textarea name="message" rows="7" required></textarea></label>
-            <button class="button" type="submit">Send Message</button>
+            <button class="button" type="submit">Prepare Enquiry</button>
+            <a class="button secondary draft-link" href="mailto:sales@mechtronglobal.com" hidden>Open Email Draft</a>
+            <p class="form-note" aria-live="polite"></p>
           </form>
         </div>
       </section>
@@ -486,6 +488,40 @@ function bindNavigation() {
   toggle?.addEventListener("click", () => {
     const open = links.classList.toggle("open");
     toggle.setAttribute("aria-expanded", String(open));
+  });
+
+  const contactForm = document.querySelector("[data-contact-form]");
+  contactForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(contactForm);
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const subject = String(formData.get("subject") || "Project enquiry").trim();
+    const message = String(formData.get("message") || "").trim();
+    const body = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      "",
+      "Message:",
+      message,
+    ].join("\n");
+    const mailto = `mailto:sales@mechtronglobal.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const draftLink = contactForm.querySelector(".draft-link");
+    const note = contactForm.querySelector(".form-note");
+    draftLink.href = mailto;
+    draftLink.hidden = false;
+
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(`To: sales@mechtronglobal.com\nSubject: ${subject}\n\n${body}`)
+        .then(() => {
+          note.textContent = "Your enquiry has been copied. Use Open Email Draft to send it.";
+        })
+        .catch(() => {
+          note.textContent = "Your enquiry is ready. Use Open Email Draft to send it.";
+        });
+    } else {
+      note.textContent = "Your enquiry is ready. Use Open Email Draft to send it.";
+    }
   });
 }
 

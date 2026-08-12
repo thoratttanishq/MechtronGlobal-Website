@@ -688,6 +688,13 @@ h1 {
   outline: 3px solid rgba(189, 130, 54, 0.18);
 }
 
+.form-note {
+  min-height: 22px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
 .office-image {
   width: 100%;
   aspect-ratio: 16 / 9;
