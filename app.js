@@ -403,7 +403,6 @@ function contact() {
             <label>Subject<input name="subject" required></label>
             <label>Message<textarea name="message" rows="7" required></textarea></label>
             <button class="button" type="submit">Prepare Enquiry</button>
-            <a class="button secondary draft-link" href="mailto:sales@mechtronglobal.com" hidden>Open Email Draft</a>
             <p class="form-note" aria-live="polite"></p>
           </form>
         </div>
@@ -505,22 +504,19 @@ function bindNavigation() {
       "Message:",
       message,
     ].join("\n");
-    const mailto = `mailto:sales@mechtronglobal.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    const draftLink = contactForm.querySelector(".draft-link");
     const note = contactForm.querySelector(".form-note");
-    draftLink.href = mailto;
-    draftLink.hidden = false;
+    const prepared = `To: sales@mechtronglobal.com\nSubject: ${subject}\n\n${body}`;
 
     if (navigator.clipboard?.writeText) {
-      navigator.clipboard.writeText(`To: sales@mechtronglobal.com\nSubject: ${subject}\n\n${body}`)
+      navigator.clipboard.writeText(prepared)
         .then(() => {
-          note.textContent = "Your enquiry has been copied. Use Open Email Draft to send it.";
+          note.textContent = "Your enquiry has been copied. Paste it into your email app and send it to sales@mechtronglobal.com.";
         })
         .catch(() => {
-          note.textContent = "Your enquiry is ready. Use Open Email Draft to send it.";
+          note.textContent = "Please email sales@mechtronglobal.com with your project details.";
         });
     } else {
-      note.textContent = "Your enquiry is ready. Use Open Email Draft to send it.";
+      note.textContent = "Please email sales@mechtronglobal.com with your project details.";
     }
   });
 }
